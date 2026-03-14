@@ -1,8 +1,8 @@
 package com.screenplay.tasks;
 
+import com.screenplay.interactions.RequestPetDetails;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.rest.interactions.Get;
 import net.serenitybdd.annotations.Step;
 
 public class GetPet implements Task {
@@ -21,7 +21,7 @@ public class GetPet implements Task {
     @Step("{0} retrieves pet with id {petId}")
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Get.resource("/pet/{petId}").with(request -> request.pathParam("petId", petId))
+                RequestPetDetails.withId(petId)
         );
     }
 }

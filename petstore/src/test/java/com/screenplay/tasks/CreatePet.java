@@ -1,13 +1,10 @@
 package com.screenplay.tasks;
 
+import com.screenplay.interactions.SubmitNewPet;
 import com.screenplay.models.Pet;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.rest.interactions.Post;
 import net.serenitybdd.annotations.Step;
-
-import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
-import static io.restassured.http.ContentType.JSON;
 
 public class CreatePet implements Task {
 
@@ -25,7 +22,7 @@ public class CreatePet implements Task {
     @Step("{0} creates a new pet in the store")
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Post.to("/pet").with(request -> request.contentType(JSON).body(pet))
+                SubmitNewPet.withData(pet)
         );
     }
 }
